@@ -52,4 +52,15 @@ To run:
 npm start
 ```
 
+## Developing
+
+After the first build, you will probably want to run in development mode:
+
+```bash
+npm run dev
+```
+
+This will watch the source code for changes and rebuild as necessary.
+It will restart the server to load those changes.
+
 Build something incredible!

@@ -4,7 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = [
     // Client
     {
-        mode: 'development',
+        mode: 'production',
         entry: './src/client/index.js',
         output: {
             filename: 'main.js',
@@ -18,7 +18,14 @@ module.exports = [
                         path.resolve(__dirname, 'src/client'),
                         path.resolve(__dirname, 'src/shared')
                     ],
-                    use: 'babel-loader',
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [ '@babel/preset-env' ]
+                            }
+                        }
+                    ],
                     exclude: /node-modules/
                 }
             ]
@@ -32,7 +39,7 @@ module.exports = [
     },
     // Server
     {
-        mode: 'development',
+        mode: 'production',
         entry: './src/server/server.js',
         output: {
             filename: 'server.js',
@@ -52,7 +59,14 @@ module.exports = [
                         path.resolve(__dirname, 'src/server'),
                         path.resolve(__dirname, 'src/shared')
                     ],
-                    use: 'babel-loader',
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [ '@babel/preset-env' ]
+                            }
+                        }
+                    ],
                     exclude: /node-modules/
                 }
             ]

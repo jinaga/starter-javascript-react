@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = [
     // Client
@@ -7,9 +8,16 @@ module.exports = [
         mode: 'production',
         entry: './src/client/index.js',
         output: {
-            filename: 'main.js',
-            path: path.resolve(__dirname, 'dist/scripts')
+            filename: 'scripts/main-[hash].js',
+            path: path.resolve(__dirname, 'dist'),
+            publicPath: '/'
         },
+        plugins: [
+          new HtmlWebpackPlugin({
+              template: 'views/index.html',
+              filename: 'views/index.html'
+          })
+        ],
         module: {
             rules: [
                 {

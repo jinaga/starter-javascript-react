@@ -21,7 +21,7 @@ module.exports = [
         module: {
             rules: [
                 {
-                    test: /\.js$/,
+                    test: /\.jsx?$/,
                     include: [
                         path.resolve(__dirname, 'src/client'),
                         path.resolve(__dirname, 'src/shared')
@@ -30,7 +30,7 @@ module.exports = [
                         {
                             loader: 'babel-loader',
                             options: {
-                                presets: [ '@babel/preset-env' ]
+                                presets: [ '@babel/preset-env', '@babel/preset-react' ]
                             }
                         }
                     ],
@@ -39,7 +39,7 @@ module.exports = [
             ]
         },
         resolve: {
-            extensions: ['.js'],
+            extensions: ['.js', '.jsx'],
             alias: {
                 "jinaga": "jinaga/dist/jinaga"
             }

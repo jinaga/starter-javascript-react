@@ -1,19 +1,20 @@
-# Jinaga Starter Kit for JavaScript
+# Jinaga Starter Kit for JavaScript and React
 
 Jinaga runs both on the server and in the browser, so that it can exchange facts between the two.
 This starter kit uses Webpack to bundle both sides.
+It also demonstrates how to update a React user interface with Jinaga.
 
-Find out more about [Jinaga](https://jinaga.com) and [Webpack](https://webpack.js.org/).
+Find out more about [Jinaga](https://jinaga.com), [Webpack](https://webpack.js.org/), and [React](https://reactjs.org/).
 
 ## Installing
 
 The easiest way to use this starter kit is to export it with Subversion.
 
 ```bash
-svn export https://github.com/jinaga/starter-javascript.git/trunk myapplication
+svn export https://github.com/jinaga/starter-javascript-react.git/trunk myapplication
 ```
 
-If you don't have Subversion installed, then you can go to the [GitHub page](https://github.com/jinaga/starter-javascript) and download it.
+If you don't have Subversion installed, then you can go to the [GitHub page](https://github.com/jinaga/starter-javascript-react) and download the zip file.
 
 Once you have the code, run:
 
@@ -29,7 +30,7 @@ The setup script is located in `node_modules/jinaga/setup.sql`.
 You can run it from the command line like this:
 
 ```bash
-psql postgresql://postgres:password@localhost:5432/myapplication -f node_modules/jinaga/setup.sql
+psql -h localhost -f node_modules/jinaga/setup.sql -U postgres myapplication
 ```
 
 For complete instructions, see [Jinaga PostgreSQL Setup](https://jinaga.com/documents/getting-started/creating-an-application/postgresql-setup/).

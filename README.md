@@ -13,7 +13,7 @@ The easiest way to use this starter kit is to export it with Subversion.
 svn export https://github.com/jinaga/starter-javascript.git/trunk myapplication
 ```
 
-If you don't have Subversion installed, then you can go to the [GitHub page](https://github.com/jinaga/starter-javascript) and download it.
+If you don't have Subversion installed, then you can go to the [GitHub page](https://github.com/jinaga/starter-javascript) and download the zip file.
 
 Once you have the code, run:
 

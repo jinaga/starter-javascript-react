@@ -29,7 +29,7 @@ The setup script is located in `node_modules/jinaga/setup.sql`.
 You can run it from the command line like this:
 
 ```bash
-psql postgresql://postgres:password@localhost:5432/myapplication -f node_modules/jinaga/setup.sql
+psql -h localhost -f node_modules/jinaga/setup.sql -U postgres myapplication
 ```
 
 For complete instructions, see [Jinaga PostgreSQL Setup](https://jinaga.com/documents/getting-started/creating-an-application/postgresql-setup/).

@@ -3,12 +3,12 @@ const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = [
-    // Client
+    // Client - index
     {
         mode: 'production',
         entry: './src/client/index.js',
         output: {
-            filename: 'scripts/main-[hash].js',
+            filename: 'scripts/index-[hash].js',
             path: path.resolve(__dirname, 'dist'),
             publicPath: '/'
         },

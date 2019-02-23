@@ -1,36 +1,22 @@
-import React from "react";
+import { collection, field, useJinaga } from "jinaga-react";
+import * as React from "react";
+import { createVisit, visitsInDomain } from "../../shared/visit";
 import { j } from "../jinaga-config";
-import { visitsInDomain, createVisit } from "../../shared/visit";
 
-export class VisitCounter extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visits: 0
-        };
-    }
+export const VisitCounter = ({ domain }) => {
+    const state = useJinaga(j, domain, [
+        collection('visits', j.for(visitsInDomain), v => v.key, [
+            field('key', v => j.hash(v))
+        ])
+    ]);
 
-    componentDidMount() {
-        this.watch = j.watch(this.props.domain, j.for(visitsInDomain),
-            visit => this.countVisit());
-        j.fact(createVisit(this.props.domain, new Date()));
-    }
+    React.useEffect(() => {
+        j.fact(createVisit(domain, new Date()))
+            .catch(err => console.error(err));
+    }, []);
 
-    componentWillUnmount() {
-        this.watch.stop();
-    }
-
-    render() {
-        return (this.state.visits
-            ? <p>You are visitor number {this.state.visits}.</p>
-            : null
-        );
-    }
-
-    countVisit() {
-        this.setState({
-            ...this.state,
-            visits: this.state.visits + 1
-        });
-    }
-}
+    return (state.visits.length > 0
+        ? <p>You are visitor number {state.visits.length}.</p>
+        : null
+    );
+};

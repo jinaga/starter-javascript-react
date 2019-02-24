@@ -45,6 +45,41 @@ module.exports = [
             }
         }
     },
+    // Client - login
+    {
+        mode: 'production',
+        entry: './src/client/login.js',
+        output: {
+            filename: 'scripts/login-[hash].js',
+            path: path.resolve(__dirname, 'dist'),
+            publicPath: '/'
+        },
+        plugins: [
+          new HtmlWebpackPlugin({
+              template: 'views/login.html',
+              filename: 'views/login.html'
+          })
+        ],
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    include: [
+                        path.resolve(__dirname, 'src/client')
+                    ],
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [ '@babel/preset-env' ]
+                            }
+                        }
+                    ],
+                    exclude: /node-modules/
+                }
+            ]
+        }
+    },
     // Server
     {
         mode: 'production',

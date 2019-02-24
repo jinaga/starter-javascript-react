@@ -1,6 +1,6 @@
 import { JinagaServer } from "jinaga";
 
-export function configureJinaga(app) {
+export function configureJinaga(app, authenticate) {
     const pgConnection = process.env.JINAGA_POSTGRESQL ||
         'postgresql://dev:devpw@localhost:5432/myapplication';
     const { handler } = JinagaServer.create({
@@ -8,5 +8,5 @@ export function configureJinaga(app) {
         pgStore: pgConnection
     });
 
-    app.use('/jinaga', handler);
+    app.use('/jinaga', authenticate, handler);
 }

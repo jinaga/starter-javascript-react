@@ -1,23 +1,32 @@
 const path = require('path');
+const fs = require('fs');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = [
-    // Client - index
-    {
+function client() {
+    const views = fs.readdirSync(path.resolve(__dirname, "views"))
+        .filter(file => path.extname(file) === ".html")
+        .map(file => path.basename(file, ".html"));
+    const scripts = fs.readdirSync(path.resolve(__dirname, "src/client"))
+        .filter(file => path.extname(file) === ".js")
+        .map(file => path.basename(file, ".js"));
+    const names = views.filter(name => scripts.includes(name));
+
+    return {
         mode: 'production',
-        entry: './src/client/index.js',
+        entry: names.reduce((e, name) =>
+            ({ ...e, [name]: `./src/client/${name}.js` }), {}),
         output: {
-            filename: 'scripts/index-[hash].js',
+            filename: 'scripts/[name]-[hash].js',
             path: path.resolve(__dirname, 'dist'),
             publicPath: '/'
         },
-        plugins: [
-          new HtmlWebpackPlugin({
-              template: 'views/index.html',
-              filename: 'views/index.html'
-          })
-        ],
+        devtool: 'source-map',
+        plugins: names.map(name => new HtmlWebpackPlugin({
+            chunks: [name],
+            template: `views/${name}.html`,
+            filename: `views/${name}.html`
+        })),
         module: {
             rules: [
                 {
@@ -41,46 +50,15 @@ module.exports = [
         resolve: {
             extensions: ['.js', '.jsx'],
             alias: {
+                "@shared": path.resolve(__dirname, "src/shared"),
                 "jinaga": "jinaga/dist/jinaga"
             }
         }
-    },
-    // Client - login
-    {
-        mode: 'production',
-        entry: './src/client/login.js',
-        output: {
-            filename: 'scripts/login-[hash].js',
-            path: path.resolve(__dirname, 'dist'),
-            publicPath: '/'
-        },
-        plugins: [
-          new HtmlWebpackPlugin({
-              template: 'views/login.html',
-              filename: 'views/login.html'
-          })
-        ],
-        module: {
-            rules: [
-                {
-                    test: /\.js$/,
-                    include: [
-                        path.resolve(__dirname, 'src/client')
-                    ],
-                    use: [
-                        {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: [ '@babel/preset-env' ]
-                            }
-                        }
-                    ],
-                    exclude: /node-modules/
-                }
-            ]
-        }
-    },
-    // Server
+    };
+}
+
+module.exports = [
+    client(),
     {
         mode: 'production',
         entry: './src/server/server.js',
@@ -115,7 +93,10 @@ module.exports = [
             ]
         },
         resolve: {
-            extensions: ['.js']
+            extensions: ['.js'],
+            alias: {
+                "@shared": path.resolve(__dirname, "src/shared")
+            }
         },
         externals: [nodeExternals()]
     }

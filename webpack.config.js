@@ -93,7 +93,10 @@ module.exports = [
             ]
         },
         resolve: {
-            extensions: ['.js']
+            extensions: ['.js'],
+            alias: {
+                "@shared": path.resolve(__dirname, "src/shared")
+            }
         },
         externals: [nodeExternals()]
     }

@@ -1,10 +1,9 @@
 import React from "react";
-import { createDomain } from "../../shared/visit";
 import { VisitCounter } from "./visit-counter";
 
-export const App = ({}) => (
+export const App = ({ domain, user }) => (
     <>
         <p>Welcome!</p>
-        <VisitCounter domain={ createDomain('myapplication') } />
+        <VisitCounter domain={ domain } />
     </>
 );

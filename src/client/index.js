@@ -24,5 +24,5 @@ import { App } from "./components/app";
     // Record this user's visit.
     await j.fact(new Visit(domain, user));
 
-    ReactDOM.render(<App domain={domain} user={user} />, document.getElementById('application-host'));
+    ReactDOM.render(<App domain={domain} />, document.getElementById('application-host'));
 })().catch(err => console.error(err));

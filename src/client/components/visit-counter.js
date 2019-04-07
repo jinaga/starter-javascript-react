@@ -1,17 +1,16 @@
-import { Visit } from "@shared/model/visit";
-import { collection, field, useJinaga } from "jinaga-react";
+import { Domain, Visit } from "@shared/model/visit";
+import { array, field, jinagaContainer, specificationFor } from "jinaga-react";
 import * as React from "react";
 import { j } from "../jinaga-config";
 
-export const VisitCounter = ({ domain }) => {
-    const state = useJinaga(j, domain, [
-        collection('visits', j.for(Visit.inDomain), v => v.key, [
-            field('key', v => j.hash(v))
-        ])
-    ]);
+const visitCounterSpec = specificationFor(Domain, {
+    visits: array(j.for(Visit.inDomain), {
+        hash: field(v => j.hash(v))
+    })
+});
 
-    return (state.visits.length > 0
-        ? <p>You are visitor number {state.visits.length}.</p>
-        : null
-    );
-};
+const visitCounterMapping = visitCounterSpec(({ visits }) => (
+    <p>You are visitor number {visits.length}.</p>
+));
+
+export const VisitCounter = jinagaContainer(j, visitCounterMapping);

@@ -4,13 +4,22 @@ import * as React from "react";
 import { j } from "../jinaga-config";
 
 const visitCounterSpec = specificationFor(Domain, {
+    domain: field(d => d),
     visits: array(j.for(Visit.inDomain), {
         hash: field(v => j.hash(v))
     })
 });
 
-const visitCounterMapping = visitCounterSpec(({ visits }) => (
-    <p>You are visitor number {visits.length}.</p>
-));
+const visitCounterMapping = visitCounterSpec(({ domain, visits, user }) => {
+    React.useEffect(() => {
+        // Record this user's visit.
+        j.fact(new Visit(domain, user, new Date()))
+            .catch(err => console.error(err));
+    }, []);
+
+    return (
+        <p>You are visitor number {visits.length}.</p>
+    );
+});
 
 export const VisitCounter = jinagaContainer(j, visitCounterMapping);

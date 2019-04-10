@@ -4,15 +4,18 @@
         "baseUrl": ".",
         "paths": {
             "@shared/*": [
-                "../shared/*"
+                "./shared/*"
             ],
             "*": [
-                "../../node_modules/*",
-                "../types/*"
+                "./node_modules/*"
             ]
         }
     },
     "include": [
-        "**/*.js"
+        "src/**/*.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
     ]
 }

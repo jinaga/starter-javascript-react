@@ -4,7 +4,7 @@
         "baseUrl": ".",
         "paths": {
             "@shared/*": [
-                "./shared/*"
+                "./src/shared/*"
             ],
             "*": [
                 "./node_modules/*"

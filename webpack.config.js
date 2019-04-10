@@ -8,14 +8,14 @@ function client() {
         .filter(file => path.extname(file) === ".html")
         .map(file => path.basename(file, ".html"));
     const scripts = fs.readdirSync(path.resolve(__dirname, "src/client"))
-        .filter(file => path.extname(file) === ".js")
-        .map(file => path.basename(file, ".js"));
+        .filter(file => path.extname(file) === ".jsx")
+        .map(file => path.basename(file, ".jsx"));
     const names = views.filter(name => scripts.includes(name));
 
     return {
         mode: 'production',
         entry: names.reduce((e, name) =>
-            ({ ...e, [name]: `./src/client/${name}.js` }), {}),
+            ({ ...e, [name]: `./src/client/${name}.jsx` }), {}),
         output: {
             filename: 'scripts/[name]-[hash].js',
             path: path.resolve(__dirname, 'dist'),

@@ -1,5 +1,6 @@
-import { JinagaBrowser } from "jinaga";
+import { JinagaBrowser } from 'jinaga';
 
 export const j = JinagaBrowser.create({
-    httpEndpoint: '/jinaga'
+  httpEndpoint: '/jinaga',
+  indexedDb: 'myapplication'
 });

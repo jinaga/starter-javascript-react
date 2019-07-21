@@ -10,14 +10,15 @@ Find out more about [Jinaga](https://jinaga.com), [Webpack](https://webpack.js.o
 
 ## Installing
 
-The easiest way to use this starter kit is to export it with Subversion.
+The easiest way to use this starter kit is to export it with Git.
 
 ```bash
-svn export https://github.com/jinaga/starter-javascript-react.git/trunk myapplication
+git clone https://github.com/jinaga/starter-javascript-react.git myapplication
+cd myapplication
+rm -rf .git
 ```
 
-If you don't have Subversion installed, then you can go to the [GitHub page](https://github.com/jinaga/starter-javascript-react) and download the zip file.
-
+Or go to the [GitHub page](https://github.com/jinaga/starter-javascript-react) and download the zip file.
 Once you have the code, run:
 
 ```bash
@@ -32,6 +33,7 @@ The setup script is located in `node_modules/jinaga/setup.sql`.
 You can run it from the command line like this:
 
 ```bash
+echo "CREATE DATABASE myapplication" | psql -h localhost -U postgres postgres
 psql -h localhost -f node_modules/jinaga/setup.sql -U postgres myapplication
 ```
 

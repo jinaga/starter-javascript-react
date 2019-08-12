@@ -18,7 +18,7 @@ export function configureAuthentication(app) {
     if (req.isAuthenticated()) {
       return next();
     }
-    res.redirect('/');
+    res.sendStatus(403);
   };
   return authenticate;
 }

@@ -28,7 +28,7 @@
     "pg": "^7.18.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "source-map-support": "^0.5.18"
+    "source-map-support": "^0.5.19"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

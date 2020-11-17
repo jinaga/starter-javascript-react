@@ -1,7 +1,5 @@
 # Jinaga Starter Kit for JavaScript and React
 
-
-
 Jinaga runs both on the server and in the browser, so that it can exchange facts between the two.
 This starter kit uses Webpack to bundle both sides.
 It also demonstrates how to update a React user interface with Jinaga.

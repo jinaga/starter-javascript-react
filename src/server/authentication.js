@@ -18,7 +18,7 @@ function configureAuthentication(app) {
     if (req.isAuthenticated()) {
       return next();
     }
-    res.sendStatus(403);
+    res.redirect('/login');
   };
   return authenticate;
 }

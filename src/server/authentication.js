@@ -1,7 +1,7 @@
-import * as passport from 'passport';
-import {configureAuthenticationTwitter} from './authentication-strategy/twitter';
+const passport = require('passport');
+const { configureAuthenticationTwitter } = require('./authentication-strategy/twitter');
 
-export function configureAuthentication(app) {
+function configureAuthentication(app) {
   passport.serializeUser((user, done) => {
     done(null, JSON.stringify(user));
   });
@@ -18,7 +18,11 @@ export function configureAuthentication(app) {
     if (req.isAuthenticated()) {
       return next();
     }
-    res.sendStatus(403);
+    res.redirect('/login');
   };
   return authenticate;
 }
+
+module.exports = {
+  configureAuthentication
+};

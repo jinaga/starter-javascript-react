@@ -21,8 +21,12 @@ function configureRoutes(app, authenticate) {
         .send(JSON.stringify(manifest));
   });
 
-  app.get(/^\/(index.html)?$/, (req, res) => {
-    res.sendFile(path.join(__dirname, './index.html'));
+  app.get(/^\/(index.html)?$/, authenticate, (req, res) => {
+    res.sendFile(path.join(__dirname, '../../dist/server/index.html'));
+  });
+
+  app.get(/^\/login(.html)?$/, (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../../views/login.html'));
   });
 
   app.get('/images/logo.png', (req, res) => {
@@ -30,11 +34,7 @@ function configureRoutes(app, authenticate) {
     renderImage(req, res, imageFileName);
   });
 
-  app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
-
-  app.get('/service-worker.js', (req, res) => {
-    res.sendFile(path.join(__dirname, './scripts/service-worker.js'));
-  });
+  app.use('/scripts', express.static(path.join(__dirname, '../../dist/scripts')));
 }
 
 module.exports = {
